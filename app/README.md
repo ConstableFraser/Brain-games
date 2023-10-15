@@ -3,3 +3,5 @@
 
 ### Maintainability
 [![Maintainability](https://api.codeclimate.com/v1/badges/8cfba5e91f98da9befed/maintainability)](https://codeclimate.com/github/ConstableFraser/java-project-61/maintainability)
+
+### Test coverage

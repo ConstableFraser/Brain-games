@@ -9,4 +9,5 @@
 ### Aciinema records:
 **the game "EVEN"**
 [![asciicast](https://asciinema.org/a/616166.svg)](https://asciinema.org/a/616166)
-
+**the game "CALCULATOR"**
+[![asciicast](https://asciinema.org/a/616213.svg)](https://asciinema.org/a/616213)

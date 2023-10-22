@@ -11,3 +11,7 @@
 [![asciicast](https://asciinema.org/a/616166.svg)](https://asciinema.org/a/616166)
 **the game "CALCULATOR"**
 [![asciicast](https://asciinema.org/a/616213.svg)](https://asciinema.org/a/616213)
+**the game "GCD"**
+[![asciicast](https://asciinema.org/a/616331.svg)](https://asciinema.org/a/616331)
+**the game "Progression"**
+[![asciicast](https://asciinema.org/a/616423.svg)](https://asciinema.org/a/616423)

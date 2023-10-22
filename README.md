@@ -7,11 +7,19 @@
 ### Test coverage
 
 ### Aciinema records:
-**the game "EVEN"**
+[EVEN](#the game EVEN "Goto the game EVEN")
+[CALCULATOR](#the game CALCULATOR "Goto the game CALCULATOR")
+[GCD](#the game GCD "Goto the game GCD")
+[Progression](#the game Progression "Goto the game Progression")
+[Prime](#the game Prime "Goto the game Prime")
+
+#### the game EVEN ####
 [![asciicast](https://asciinema.org/a/616166.svg)](https://asciinema.org/a/616166)
-**the game "CALCULATOR"**
+#### the game CALCULATOR ####
 [![asciicast](https://asciinema.org/a/616213.svg)](https://asciinema.org/a/616213)
-**the game "GCD"**
+#### the game GCD ####
 [![asciicast](https://asciinema.org/a/616331.svg)](https://asciinema.org/a/616331)
-**the game "Progression"**
+#### the game Progression ####
 [![asciicast](https://asciinema.org/a/616423.svg)](https://asciinema.org/a/616423)
+#### the game Prime ####
+[![asciicast](https://asciinema.org/a/616441.svg)](https://asciinema.org/a/616441)

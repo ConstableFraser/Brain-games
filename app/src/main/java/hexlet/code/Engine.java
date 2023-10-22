@@ -5,12 +5,13 @@ import java.util.Scanner;
 import hexlet.code.games.Progression;
 import hexlet.code.games.Calculator;
 import hexlet.code.games.EvenGame;
+import hexlet.code.games.Prime;
 import hexlet.code.games.GCD;
 
 import static hexlet.code.Cli.greeting;
 public class Engine {
     private static final int COUNT_SYSTEM_ITEMS = 2;
-    private static final String[] MENU_OF_GAME = {"Greet", "Even", "Calc", "GCD", "Progression", "Exit"};
+    private static final String[] MENU_OF_GAME = {"Greet", "Even", "Calc", "GCD", "Progression", "Prime", "Exit"};
     private static final String WELCOME_TEXT = "Please enter the game number and press Enter.";
     private static final String LOSE = """
                                        '%s' is wrong answer ;(. Correct answer was '%s'.
@@ -26,7 +27,7 @@ public class Engine {
     public static void startEngine() {
         Scanner scanner = new Scanner(System.in);
         int menuItem;
-        Game[] allGames = new Game[]{new EvenGame(), new Calculator(), new GCD(), new Progression()};
+        Game[] allGames = new Game[]{new EvenGame(), new Calculator(), new GCD(), new Progression(), new Prime()};
 
         System.out.println(WELCOME_TEXT);
         printListOfGames();

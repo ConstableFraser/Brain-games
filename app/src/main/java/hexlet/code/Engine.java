@@ -21,6 +21,13 @@ public class Engine {
     private static final String ANSWER = "Your answer: ";
     private static final String ANSWER_CORRECT = "Correct!";
     private static final int NUMBER_OF_ROUNDS = 3;
+    private static final int EXIT = 0;
+    private static final int GREETING = 1;
+    private static final int EVEN = 2;
+    private static final int CALCULATOR = 3;
+    private static final int GCD = 4;
+    private static final int PROGRESSION = 5;
+    private static final int PRIME = 6;
 
 
     public static void startEngine() {
@@ -32,40 +39,40 @@ public class Engine {
         menuItem = scanner.nextInt();
         System.out.println("Your choice: " + menuItem);
 
-        String[] questions;
+        String[] questions = ;
         String[] answers;
         String prompt;
 
         switch (menuItem) {
-            case 1:
+            case GREETING:
                 greeting();
                 return;
-            case 2:
+            case EVEN:
                 prompt = Even.getPrompt();
                 questions = Even.getQuestions(NUMBER_OF_ROUNDS);
                 answers = Even.getCorrectAnswers();
                 break;
-            case 3:
+            case CALCULATOR:
                 prompt = Calculator.getPrompt();
                 questions = Calculator.getQuestions(NUMBER_OF_ROUNDS);
                 answers = Calculator.getCorrectAnswers();
                 break;
-            case 4:
+            case GCD:
                 prompt = GCD.getPrompt();
                 questions = GCD.getQuestions(NUMBER_OF_ROUNDS);
                 answers = GCD.getCorrectAnswers();
                 break;
-            case 5:
+            case PROGRESSION:
                 prompt = Progression.getPrompt();
                 questions = Progression.getQuestions(NUMBER_OF_ROUNDS);
                 answers = Progression.getCorrectAnswers();
                 break;
-            case 6:
+            case PRIME:
                 prompt = Prime.getPrompt();
                 questions = Prime.getQuestions(NUMBER_OF_ROUNDS);
                 answers = Prime.getCorrectAnswers();
                 break;
-            case 0:
+            case EXIT:
             default:
                 return;
         }

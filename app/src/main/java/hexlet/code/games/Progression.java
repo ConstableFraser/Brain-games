@@ -2,34 +2,39 @@ package hexlet.code.games;
 
 import java.util.Random;
 
-import hexlet.code.Game;
-public class Progression implements Game {
+public class Progression {
     private static final String PROMPT = "What number is missing in the progression?";
     private static final int MAX_RAND = 100;
     private static final int MAX_LENGTH = 10;
     private static final int MAX_STEP = 5;
-    private final String[] numbers = new String[MAX_LENGTH];
-    private int correctAnswer;
-    private final Random rand;
+    private static String[] correctAnswers;
+    private static final Random RAND = new Random();
 
-    public Progression() {
-        System.out.println(PROMPT);
-        this.rand = new Random();
+    public static String getPrompt() {
+        return PROMPT;
     }
-    public void printPrompt() {
-        System.out.println(PROMPT);
+    public static String[] getQuestions(int rounds) {
+        String[] questions = new String[rounds];
+        correctAnswers = new String[rounds];
+
+        for (int i = 0; i < rounds; i++) {
+            questions[i] = makeQuestion(i);
+        }
+        return questions;
     }
-    public String getQuestion() {
-        int curNumber = rand.nextInt(MAX_RAND);
-        int stopQuestion = rand.nextInt(MAX_LENGTH - 1);
-        int step = rand.nextInt(MAX_STEP);
+    private static String makeQuestion(int cur) {
+        String[] numbers = new String[MAX_LENGTH];
+        int curNumber = RAND.nextInt(MAX_RAND);
+        int stopQuestion = RAND.nextInt(MAX_LENGTH - 1);
+        int step = RAND.nextInt(MAX_STEP);
+
         while (step == 0) {
-            step = rand.nextInt(MAX_STEP);
+            step = RAND.nextInt(MAX_STEP);
         }
 
         for (int i = 0; i < MAX_LENGTH; i++) {
             if (i == stopQuestion) {
-                this.correctAnswer = curNumber;
+                correctAnswers[cur] = String.valueOf(curNumber);
                 numbers[i] = "..";
                 curNumber += step;
                 continue;
@@ -37,13 +42,9 @@ public class Progression implements Game {
             numbers[i] = String.valueOf(curNumber);
             curNumber += step;
         }
-
         return String.join(" ", numbers);
     }
-    public Boolean isCorrectAnswer(String answer) {
-        return String.valueOf(correctAnswer).equals(answer);
-    }
-    public String getCorrectAnswer() {
-        return String.valueOf(correctAnswer);
+    public static String[] getCorrectAnswers() {
+        return correctAnswers;
     }
 }

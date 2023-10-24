@@ -1,52 +1,47 @@
 package hexlet.code.games;
 
-import hexlet.code.Game;
-
 import java.util.Random;
 
-public class Calculator implements Game {
+public class Calculator {
     private static final String PROMPT = "What is the result of the expression?";
     private static final int MAX_RAND = 100;
-    private final String[] operators = {"+", "-", "*"};
-    private String operator;
-    private int operandA;
-    private int operandB;
-    private int correctAnswer;
-    private final Random rand;
+    private static final String[] OPERATORS = {"+", "-", "*"};
+    private static String[] correctAnswers;
+    private static final Random RAND = new Random();
 
-    public Calculator() {
-        System.out.println(PROMPT);
-        this.rand = new Random();
+    public static String getPrompt() {
+        return PROMPT;
     }
-    public void printPrompt() {
-        System.out.println(PROMPT);
-    }
-    public String getQuestion() {
-        this.operator = operators[rand.nextInt(operators.length)];
-        this.operandA = rand.nextInt(MAX_RAND);
-        this.operandB = rand.nextInt(MAX_RAND);
+    public static String[] getQuestions(int rounds) {
+        String[] questions = new String[rounds];
+        correctAnswers = new String[rounds];
+        String operator;
+        int operandA;
+        int operandB;
 
-        return String.format("%s %s %s", operandA, operator, operandB);
-    }
-    public Boolean isCorrectAnswer(String answer) {
-        int result;
-        switch (operator) {
-            case "+":
-                result = operandA + operandB;
-                break;
-            case "-":
-                result = operandA - operandB;
-                break;
-            case "*":
-                result = operandA * operandB;
-                break;
-            default:
-                return null;
+        for (int i = 0; i < rounds; i++) {
+            operator = OPERATORS[RAND.nextInt(OPERATORS.length)];
+            operandA = RAND.nextInt(MAX_RAND);
+            operandB = RAND.nextInt(MAX_RAND);
+            questions[i] = String.format("%s %s %s", operandA, operator, operandB);
+
+            switch (operator) {
+                case "+":
+                    correctAnswers[i] = String.valueOf(operandA + operandB);
+                    break;
+                case "-":
+                    correctAnswers[i] = String.valueOf(operandA - operandB);
+                    break;
+                case "*":
+                    correctAnswers[i] = String.valueOf(operandA * operandB);
+                    break;
+                default:
+                    return null;
+            }
         }
-        this.correctAnswer = result;
-        return String.valueOf(result).equals(answer);
+        return questions;
     }
-    public String getCorrectAnswer() {
-        return String.valueOf(correctAnswer);
+    public static String[] getCorrectAnswers() {
+        return correctAnswers;
     }
 }

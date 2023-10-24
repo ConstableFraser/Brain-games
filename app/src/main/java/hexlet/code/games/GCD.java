@@ -2,38 +2,33 @@ package hexlet.code.games;
 
 import java.util.Random;
 
-import hexlet.code.Game;
-
-public class GCD implements Game {
+public class GCD {
     private static final String PROMPT = "Find the greatest common divisor of given numbers.";
     private static final int MAX_RAND = 100;
-    private int operandA;
-    private int operandB;
-    private int correctAnswer;
-    private final Random rand;
+    private static String[] correctAnswers;
+    private static final Random RAND = new Random();
 
-    public GCD() {
-        System.out.println(PROMPT);
-        this.rand = new Random();
+    public static String getPrompt() {
+        return PROMPT;
     }
-    public void printPrompt() {
-        System.out.println(PROMPT);
-    }
-    public String getQuestion() {
-        this.operandA = rand.nextInt(MAX_RAND);
-        this.operandB = rand.nextInt(MAX_RAND);
+    public static String[] getQuestions(int rounds) {
+        String[] questions = new String[rounds];
+        correctAnswers = new String[rounds];
+        int operandA;
+        int operandB;
 
-        return String.format("%s %s", operandA, operandB);
+        for (int i = 0; i < rounds; i++) {
+            operandA = RAND.nextInt(MAX_RAND);
+            operandB = RAND.nextInt(MAX_RAND);
+            questions[i] = String.format("%s %s", operandA, operandB);
+            correctAnswers[i] = String.valueOf(gcd(operandA, operandB));
+        }
+        return questions;
     }
-    public Boolean isCorrectAnswer(String answer) {
-        int result = gcd(operandA, operandB);
-        this.correctAnswer = result;
-        return String.valueOf(result).equals(answer);
-    }
-    private int gcd(int a, int b) {
+    private static int gcd(int a, int b) {
         return (a % b == 0) ? Math.abs(b) : gcd(b, a % b);
     }
-    public String getCorrectAnswer() {
-        return String.valueOf(correctAnswer);
+    public static String[] getCorrectAnswers() {
+        return correctAnswers;
     }
 }

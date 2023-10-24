@@ -4,13 +4,12 @@ import java.util.Scanner;
 
 import hexlet.code.games.Progression;
 import hexlet.code.games.Calculator;
-import hexlet.code.games.EvenGame;
 import hexlet.code.games.Prime;
+import hexlet.code.games.Even;
 import hexlet.code.games.GCD;
 
 import static hexlet.code.Cli.greeting;
 public class Engine {
-    private static final int COUNT_SYSTEM_ITEMS = 2;
     private static final String[] MENU_OF_GAME = {"Greet", "Even", "Calc", "GCD", "Progression", "Prime", "Exit"};
     private static final String WELCOME_TEXT = "Please enter the game number and press Enter.";
     private static final String LOSE = """
@@ -27,34 +26,59 @@ public class Engine {
     public static void startEngine() {
         Scanner scanner = new Scanner(System.in);
         int menuItem;
-        Game[] allGames = new Game[]{new EvenGame(), new Calculator(), new GCD(), new Progression(), new Prime()};
 
         System.out.println(WELCOME_TEXT);
         printListOfGames();
         menuItem = scanner.nextInt();
         System.out.println("Your choice: " + menuItem);
 
-        if (menuItem - COUNT_SYSTEM_ITEMS > allGames.length || menuItem <= 0) {
-            return;
-        }
+        String[] questions;
+        String[] answers;
+        String prompt;
 
-        if (menuItem == 1) {
-            greeting();
-            return;
+        switch (menuItem) {
+            case 1:
+                greeting();
+                return;
+            case 2:
+                prompt = Even.getPrompt();
+                questions = Even.getQuestions(NUMBER_OF_ROUNDS);
+                answers = Even.getCorrectAnswers();
+                break;
+            case 3:
+                prompt = Calculator.getPrompt();
+                questions = Calculator.getQuestions(NUMBER_OF_ROUNDS);
+                answers = Calculator.getCorrectAnswers();
+                break;
+            case 4:
+                prompt = GCD.getPrompt();
+                questions = GCD.getQuestions(NUMBER_OF_ROUNDS);
+                answers = GCD.getCorrectAnswers();
+                break;
+            case 5:
+                prompt = Progression.getPrompt();
+                questions = Progression.getQuestions(NUMBER_OF_ROUNDS);
+                answers = Progression.getCorrectAnswers();
+                break;
+            case 6:
+                prompt = Prime.getPrompt();
+                questions = Prime.getQuestions(NUMBER_OF_ROUNDS);
+                answers = Prime.getCorrectAnswers();
+                break;
+            case 0:
+            default:
+                return;
         }
 
         String nameOfUser = greeting();
-        var game = allGames[menuItem - COUNT_SYSTEM_ITEMS];
-        game.printPrompt();
+        System.out.println(prompt);
 
         for (int i = 0; i < NUMBER_OF_ROUNDS; i++) {
-            var value = game.getQuestion();
-            System.out.println(QUESTION + value);
+            System.out.println(QUESTION + questions[i]);
             System.out.print(ANSWER);
             var answerOfUser = scanner.next();
-            if (!game.isCorrectAnswer(answerOfUser)) {
-                var correctAnswer = game.getCorrectAnswer();
-                System.out.format(LOSE, answerOfUser, correctAnswer, nameOfUser);
+            if (!answerOfUser.equals(answers[i])) {
+                System.out.format(LOSE, answerOfUser, answers[i], nameOfUser);
                 return;
             }
             System.out.println(ANSWER_CORRECT);

@@ -25,7 +25,7 @@ public class Engine {
     private static final int GREETING = 1;
     private static final int EVEN = 2;
     private static final int CALCULATOR = 3;
-    private static final int GCD = 4;
+    private static final int GCD_ITEM = 4;
     private static final int PROGRESSION = 5;
     private static final int PRIME = 6;
 
@@ -39,7 +39,7 @@ public class Engine {
         menuItem = scanner.nextInt();
         System.out.println("Your choice: " + menuItem);
 
-        String[] questions = ;
+        String[] questions;
         String[] answers;
         String prompt;
 
@@ -57,7 +57,7 @@ public class Engine {
                 questions = Calculator.getQuestions(NUMBER_OF_ROUNDS);
                 answers = Calculator.getCorrectAnswers();
                 break;
-            case GCD:
+            case GCD_ITEM:
                 prompt = GCD.getPrompt();
                 questions = GCD.getQuestions(NUMBER_OF_ROUNDS);
                 answers = GCD.getCorrectAnswers();

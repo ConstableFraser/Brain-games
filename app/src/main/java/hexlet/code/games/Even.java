@@ -6,7 +6,6 @@ import hexlet.code.Engine;
 public class Even {
     private static final String PROMPT = "Answer 'yes' if the number is even, otherwise answer 'no'.";
     private static final int MAX_RAND = 100;
-    //private static int value;
     private static final Random RAND = new Random();
 
     public static void playGame(String nameOfUser) {

@@ -14,7 +14,6 @@ public class Calculator {
         String operator;
         int operandA;
         int operandB;
-        String correctAnswer;
         System.out.println(PROMPT);
         boolean isCorrect = true;
 
@@ -22,19 +21,6 @@ public class Calculator {
             operator = OPERATORS[RAND.nextInt(OPERATORS.length)];
             operandA = RAND.nextInt(MAX_RAND);
             operandB = RAND.nextInt(MAX_RAND);
-            switch (operator) {
-                case "+":
-                    correctAnswer = String.valueOf(operandA + operandB);
-                    break;
-                case "-":
-                    correctAnswer = String.valueOf(operandA - operandB);
-                    break;
-                case "*":
-                    correctAnswer = String.valueOf(operandA * operandB);
-                    break;
-                default:
-                    break;
-            }
 
             var question = String.format("%s %s %s", operandA, operator, operandB);
             Engine.displayQuestion(String.valueOf(question));

@@ -34,7 +34,7 @@ public class Calculator {
         String[] operators = new String[2];
         operators[0] = question.substring(0, question.indexOf(operator) - 1);
         operators[1] = question.substring(question.indexOf(operator) + 1);
-        int value = 0;
+        int value;
         switch (operator) {
             case "+":
                 value = Integer.parseInt(operators[0].trim()) + Integer.parseInt(operators[1].trim());

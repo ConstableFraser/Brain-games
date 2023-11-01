@@ -31,9 +31,6 @@ public class Calculator {
                 break;
             }
         }
-        if (operator.isBlank()) {
-            return 0;
-        }
         String[] operators = new String[2];
         operators[0] = question.substring(0, question.indexOf(operator) - 1);
         operators[1] = question.substring(question.indexOf(operator) + 1);
@@ -41,14 +38,15 @@ public class Calculator {
         switch (operator) {
             case "+":
                 value = Integer.parseInt(operators[0].trim()) + Integer.parseInt(operators[1].trim());
-                break;
+                return value;
             case "-":
                 value = Integer.parseInt(operators[0].trim()) - Integer.parseInt(operators[1].trim());
-                break;
+                return value;
             case "*":
                 value = Integer.parseInt(operators[0].trim()) * Integer.parseInt(operators[1].trim());
-                break;
+                return value;
+            default:
+                return 0;
         }
-        return value;
     }
 }

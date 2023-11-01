@@ -14,7 +14,7 @@ public class GCD {
 
         for (int i = 0; i < numberOfRounds; i++) {
             int operandA = randInt(MAX_RAND);
-            int operandB = randInt(MAX_RAND);
+            int operandB = randInt(1, MAX_RAND);
             questions[i] = String.format("%s %s", operandA, operandB);
             answers[i] = String.valueOf(gcd(operandA, operandB));
         }

@@ -24,9 +24,7 @@ public class Calculator {
     }
 
     public static int calc(String question) {
-        int value;
         String operator = "";
-
         for (String item : OPERATORS) {
             if (question.contains(item)) {
                 operator = item;
@@ -36,11 +34,11 @@ public class Calculator {
         if (operator.isBlank()) {
             return 0;
         }
-
         String[] operators = new String[2];
         operators[0] = question.substring(0, question.indexOf(operator) - 1);
         operators[1] = question.substring(question.indexOf(operator) + 1);
 
+        int value = 0;
         switch (operator) {
             case "+":
                 value = Integer.parseInt(operators[0].trim()) + Integer.parseInt(operators[1].trim());
@@ -51,8 +49,6 @@ public class Calculator {
             case "*":
                 value = Integer.parseInt(operators[0].trim()) * Integer.parseInt(operators[1].trim());
                 break;
-            default:
-                value = 0;
         }
         return value;
     }

@@ -1,59 +1,59 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
-
-import java.util.Random;
+import static hexlet.code.Utils.randInt;
 
 public class Calculator {
     private static final String PROMPT = "What is the result of the expression?";
     private static final int MAX_RAND = 100;
     private static final String[] OPERATORS = {"+", "-", "*"};
-    private static final Random RAND = new Random();
 
-    public static void playGame(String nameOfUser) {
-        String operator;
-        int operandA;
-        int operandB;
-        System.out.println(PROMPT);
-        boolean isCorrect = true;
+    public static void playGame() {
+        int numberOfRounds = Engine.getNumberOfRounds();
+        String[] questions = new String[numberOfRounds];
+        String[] answers = new String[numberOfRounds];
 
-        for (int i = 0; i < Engine.getNumberOfRounds() && isCorrect; i++) {
-            operator = OPERATORS[RAND.nextInt(OPERATORS.length)];
-            operandA = RAND.nextInt(MAX_RAND);
-            operandB = RAND.nextInt(MAX_RAND);
-
-            var question = String.format("%s %s %s", operandA, operator, operandB);
-            Engine.displayQuestion(String.valueOf(question));
-            String userAnswer = Engine.displayAnswer();
-            isCorrect = isCorrectAnswer(userAnswer, operandA, operandB, operator);
-            Engine.displayResultOfRound(isCorrect,
-                                        userAnswer,
-                                        getCorrectAnswer(operandA, operandB, operator),
-                                        nameOfUser);
+        for (int i = 0; i < numberOfRounds; i++) {
+            String operator = OPERATORS[randInt(OPERATORS.length)];
+            int operandA = randInt(MAX_RAND);
+            int operandB = randInt(MAX_RAND);
+            questions[i] = String.format("%s %s %s", operandA, operator, operandB);
+            answers[i] = String.valueOf(calc(questions[i]));
         }
-        if (isCorrect) {
-            Engine.displayResultOfGame(nameOfUser);
+        Engine.startEngine(PROMPT, questions, answers);
+    }
+
+    public static int calc(String question) {
+        int value;
+        String operator = "";
+
+        for (String item : OPERATORS) {
+            if (question.contains(item)) {
+                operator = item;
+                break;
+            }
         }
-    }
-    public static boolean isCorrectAnswer(String userAnswer, int operandA, int operandB, String operator) {
-        return userAnswer.equals(getCorrectAnswer(operandA, operandB, operator));
-    }
-    public static String getCorrectAnswer(int operandA, int operandB, String operator) {
-        String correctAnswer = "";
+        if (operator.isBlank()) {
+            return 0;
+        }
+
+        String[] operators = new String[2];
+        operators[0] = question.substring(0, question.indexOf(operator) - 1);
+        operators[1] = question.substring(question.indexOf(operator) + 1);
 
         switch (operator) {
             case "+":
-                correctAnswer = String.valueOf(operandA + operandB);
+                value = Integer.parseInt(operators[0].trim()) + Integer.parseInt(operators[1].trim());
                 break;
             case "-":
-                correctAnswer = String.valueOf(operandA - operandB);
+                value = Integer.parseInt(operators[0].trim()) - Integer.parseInt(operators[1].trim());
                 break;
             case "*":
-                correctAnswer = String.valueOf(operandA * operandB);
+                value = Integer.parseInt(operators[0].trim()) * Integer.parseInt(operators[1].trim());
                 break;
             default:
-                break;
+                value = 0;
         }
-        return correctAnswer;
+        return value;
     }
 }

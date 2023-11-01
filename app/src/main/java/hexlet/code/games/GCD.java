@@ -1,41 +1,26 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
-
-import java.util.Random;
+import static hexlet.code.Utils.randInt;
 
 public class GCD {
     private static final String PROMPT = "Find the greatest common divisor of given numbers.";
     private static final int MAX_RAND = 100;
-    private static final Random RAND = new Random();
 
-    public static void playGame(String nameOfUser) {
-        System.out.println(PROMPT);
-        boolean isCorrect = true;
-        int operandA;
-        int operandB;
+    public static void playGame() {
+        int numberOfRounds = Engine.getNumberOfRounds();
+        String[] questions = new String[numberOfRounds];
+        String[] answers = new String[numberOfRounds];
 
-        for (int i = 0; i < Engine.getNumberOfRounds() && isCorrect; i++) {
-            operandA = RAND.nextInt(MAX_RAND);
-            operandB = RAND.nextInt(MAX_RAND);
-
-            var question = String.format("%s %s", operandA, operandB);
-            Engine.displayQuestion(String.valueOf(question));
-            String userAnswer = Engine.displayAnswer();
-            isCorrect = isCorrectAnswer(userAnswer, operandA, operandB);
-            Engine.displayResultOfRound(isCorrect, userAnswer, getCorrectAnswer(operandA, operandB), nameOfUser);
+        for (int i = 0; i < numberOfRounds; i++) {
+            int operandA = randInt(MAX_RAND);
+            int operandB = randInt(MAX_RAND);
+            questions[i] = String.format("%s %s", operandA, operandB);
+            answers[i] = String.valueOf(gcd(operandA, operandB));
         }
-        if (isCorrect) {
-            Engine.displayResultOfGame(nameOfUser);
-        }
+        Engine.startEngine(PROMPT, questions, answers);
     }
     private static int gcd(int a, int b) {
         return (a % b == 0) ? Math.abs(b) : gcd(b, a % b);
-    }
-    public static boolean isCorrectAnswer(String userAnswer, int operandA, int operandB) {
-        return userAnswer.equals(getCorrectAnswer(operandA, operandB));
-    }
-    public static String getCorrectAnswer(int operandA, int operandB) {
-        return String.valueOf(gcd(operandA, operandB));
     }
 }

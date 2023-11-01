@@ -1,32 +1,26 @@
 package hexlet.code.games;
 
-import java.util.Random;
 import hexlet.code.Engine;
+import static hexlet.code.Utils.randInt;
 
 public class Even {
     private static final String PROMPT = "Answer 'yes' if the number is even, otherwise answer 'no'.";
     private static final int MAX_RAND = 100;
-    private static final Random RAND = new Random();
 
-    public static void playGame(String nameOfUser) {
-        System.out.println(PROMPT);
-        boolean isCorrect = true;
+    public static void playGame() {
+        int numberOfRounds = Engine.getNumberOfRounds();
+        String[] questions = new String[numberOfRounds];
+        String[] answers = new String[numberOfRounds];
 
-        for (int i = 0; i < Engine.getNumberOfRounds() && isCorrect; i++) {
-            int questionValue = RAND.nextInt(MAX_RAND);
-            Engine.displayQuestion(String.valueOf(questionValue));
-            String userAnswer = Engine.displayAnswer();
-            isCorrect = isCorrectAnswer(userAnswer, questionValue);
-            Engine.displayResultOfRound(isCorrect, userAnswer, getCorrectAnswer(questionValue), nameOfUser);
+        for (int i = 0; i < numberOfRounds; i++) {
+            int questionValue = randInt(MAX_RAND);
+            boolean answerValue = isEven(questionValue);
+            questions[i] = String.valueOf(questionValue);
+            answers[i] = answerValue ? "yes" : "no";
         }
-        if (isCorrect) {
-            Engine.displayResultOfGame(nameOfUser);
-        }
+        Engine.startEngine(PROMPT, questions, answers);
     }
-    public static boolean isCorrectAnswer(String userAnswer, int questionValue) {
-        return userAnswer.equals(getCorrectAnswer(questionValue));
-    }
-    public static String getCorrectAnswer(int questionValue) {
-        return questionValue % 2 == 0 ? "yes" : "no";
+    public static boolean isEven(int value) {
+        return value % 2 == 0;
     }
 }

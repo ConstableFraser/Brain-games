@@ -1,36 +1,26 @@
 package hexlet.code.games;
 
-import java.util.Random;
 import org.apache.commons.lang3.ArrayUtils;
 
 import hexlet.code.Engine;
-
+import static hexlet.code.Utils.randInt;
 
 public class Progression {
     private static final String PROMPT = "What number is missing in the progression?";
     private static final int MAX_RAND = 100;
     private static final int MAX_LENGTH = 10;
     private static final int MAX_STEP = 5;
-    private static final Random RAND = new Random();
 
-    public static void playGame(String nameOfUser) {
-        boolean isCorrect = true;
-        System.out.println(PROMPT);
+    public static void playGame() {
+        int numberOfRounds = Engine.getNumberOfRounds();
+        String[] questions = new String[numberOfRounds];
+        String[] answers = new String[numberOfRounds];
 
-        for (int i = 0; i < Engine.getNumberOfRounds() && isCorrect; i++) {
-            String question = String.join(" ", makeQuestion());
-            Engine.displayQuestion(question);
-            String userAnswer = Engine.displayAnswer();
-            isCorrect = isCorrectAnswer(userAnswer, question);
-            Engine.displayResultOfRound(isCorrect, userAnswer, getCorrectAnswer(question), nameOfUser);
+        for (int i = 0; i < numberOfRounds; i++) {
+            questions[i] = String.join(" ", makeQuestion());
+            answers[i] = getCorrectAnswer(questions[i]);
         }
-        if (isCorrect) {
-            Engine.displayResultOfGame(nameOfUser);
-        }
-    }
-
-    public static boolean isCorrectAnswer(String userAnswer, String question) {
-        return userAnswer.equals(getCorrectAnswer(question));
+        Engine.startEngine(PROMPT, questions, answers);
     }
 
     public static String getCorrectAnswer(String question) {
@@ -38,7 +28,7 @@ public class Progression {
         // позиция искомого элемента
         int posSecret = ArrayUtils.indexOf(words, "..");
         int delta = 0;
-        // узнаём значение дельты - разницы между двумя соседними цифрами
+        // получаем значение дельты - разницу между двумя соседними цифрами
         for (int i = 0; i < words.length - 1; i++) {
             if (words[i].equals("..") || words[i + 1].equals("..")) {
                 continue;
@@ -53,13 +43,9 @@ public class Progression {
 
     private static String[] makeQuestion() {
         String[] numbers = new String[MAX_LENGTH];
-        int startNumber = RAND.nextInt(MAX_RAND);
-        int stopQuestion = RAND.nextInt(MAX_LENGTH);
-        int step = RAND.nextInt(MAX_STEP);
-
-        while (step == 0) {
-            step = RAND.nextInt(MAX_STEP);
-        }
+        int startNumber = randInt(MAX_RAND);
+        int stopQuestion = randInt(MAX_LENGTH);
+        int step = randInt(1, MAX_STEP);
 
         for (int i = 0; i < MAX_LENGTH; i++) {
             if (i == stopQuestion) {

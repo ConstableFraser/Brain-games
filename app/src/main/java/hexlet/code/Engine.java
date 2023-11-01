@@ -2,6 +2,8 @@ package hexlet.code;
 
 import java.util.Scanner;
 
+import static hexlet.code.Cli.greeting;
+
 public class Engine {
     private static final String LOSE = """
                                        '%s' is wrong answer ;(. Correct answer was '%s'.
@@ -13,26 +15,27 @@ public class Engine {
     private static final String ANSWER_CORRECT = "Correct!";
     private static final int NUMBER_OF_ROUNDS = 3;
 
-    public static void displayQuestion(String value) {
-        System.out.println(QUESTION + value);
-    }
-    public static String displayAnswer() {
+    public static void startEngine(String prompt, String[] questions, String[] answers) {
+        String userName = greeting();
+        System.out.println(prompt);
+        boolean isCorrect = true;
         Scanner scanner = new Scanner(System.in);
-        System.out.print(ANSWER);
-        return scanner.next();
-    }
-    public static void displayResultOfRound(boolean isCorrect,
-                                            String userAnswer,
-                                            String correctAnswer,
-                                            String nameOfUser) {
-        if (isCorrect) {
-            System.out.println(ANSWER_CORRECT);
-        } else {
-            System.out.format(LOSE, userAnswer, correctAnswer, nameOfUser);
+
+        for (int i = 0; i < NUMBER_OF_ROUNDS && isCorrect; i++) {
+            String userAnswer;
+            System.out.println(QUESTION + questions[i]);
+            userAnswer = scanner.next();
+            System.out.println(ANSWER + userAnswer);
+            isCorrect = userAnswer.equals(answers[i]);
+            if (isCorrect) {
+                System.out.println(ANSWER_CORRECT);
+            } else {
+                System.out.format(LOSE, userAnswer, answers[i], userName);
+            }
         }
-    }
-    public static void displayResultOfGame(String nameOfUser) {
-        System.out.format(WIN, nameOfUser);
+        if (isCorrect) {
+            System.out.format(WIN, userName);
+        }
     }
     public static int getNumberOfRounds() {
         return NUMBER_OF_ROUNDS;

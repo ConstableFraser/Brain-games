@@ -45,19 +45,19 @@ public class App {
                 greeting();
                 return;
             case EVEN:
-                Even.playGame(greeting());
+                Even.playGame();
                 break;
             case CALCULATOR:
-                Calculator.playGame(greeting());
+                Calculator.playGame();
                 break;
             case GCD_ITEM:
-                GCD.playGame(greeting());
+                GCD.playGame();
                 break;
             case PROGRESSION:
-                Progression.playGame(greeting());
+                Progression.playGame();
                 break;
             case PRIME:
-                Prime.playGame(greeting());
+                Prime.playGame();
                 break;
             case EXIT:
             default:

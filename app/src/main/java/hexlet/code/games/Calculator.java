@@ -34,17 +34,15 @@ public class Calculator {
         String[] operators = new String[2];
         operators[0] = question.substring(0, question.indexOf(operator) - 1);
         operators[1] = question.substring(question.indexOf(operator) + 1);
-        int value;
+        int operandA = Integer.parseInt(operators[0].trim());
+        int operandB = Integer.parseInt(operators[1].trim());
         switch (operator) {
             case "+":
-                value = Integer.parseInt(operators[0].trim()) + Integer.parseInt(operators[1].trim());
-                return value;
+                return operandA + operandB;
             case "-":
-                value = Integer.parseInt(operators[0].trim()) - Integer.parseInt(operators[1].trim());
-                return value;
+                return operandA - operandB;
             case "*":
-                value = Integer.parseInt(operators[0].trim()) * Integer.parseInt(operators[1].trim());
-                return value;
+                return operandA * operandB;
             default:
                 return 0;
         }

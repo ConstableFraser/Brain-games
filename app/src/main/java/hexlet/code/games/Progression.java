@@ -9,12 +9,13 @@ public class Progression {
     private static final int MAX_RAND = 100;
     private static final int MAX_LENGTH = 11;
     private static final int MAX_STEP = 5;
+    private static final int MIN_LENGTH = 5;
 
     public static void playGame() {
         String[][] questionsAndAnswers = new String[Engine.NUMBER_OF_ROUNDS][2];
 
         for (int i = 0; i < Engine.NUMBER_OF_ROUNDS; i++) {
-            String[] question = makeQuestion(randInt(5, MAX_LENGTH), randInt(1, MAX_STEP), randInt(MAX_RAND));
+            String[] question = makeQuestion(randInt(MIN_LENGTH, MAX_LENGTH), randInt(1, MAX_STEP), randInt(MAX_RAND));
             question[randInt(1, question.length)] = "..";
             questionsAndAnswers[i][0] = String.join(" ", question);
             questionsAndAnswers[i][1] = getCorrectAnswer(questionsAndAnswers[i][0]);

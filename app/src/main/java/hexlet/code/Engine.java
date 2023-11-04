@@ -17,16 +17,14 @@ public class Engine {
             userAnswer = scanner.next();
             System.out.println("Your answer: " + userAnswer);
             isCorrect = userAnswer.equals(questionsAndAnswers[i][1]);
-            if (isCorrect) {
-                System.out.println("Correct!");
-            } else {
+            if (!isCorrect) {
                 System.out.format("'%s' is wrong answer ;(. Correct answer was '%s'.\nLet's try again, %s!%n",
                         userAnswer, questionsAndAnswers[i][1], userName);
+                return;
             }
+            System.out.println("Correct!");
         }
-        if (isCorrect) {
-            System.out.format("Congratulations, %s!%n", userName);
-        }
+        System.out.format("Congratulations, %s!%n", userName);
     }
 
     public static String introducing() {

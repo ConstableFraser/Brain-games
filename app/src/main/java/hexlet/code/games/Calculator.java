@@ -5,6 +5,7 @@ import static hexlet.code.Utils.randInt;
 
 public class Calculator {
     private static final int MAX_RAND = 100;
+    private static final int COUNT_OPERATOR_OPERANDS = 3;
     private static final String[] OPERATORS = {"+", "-", "*"};
 
     public static void playGame() {
@@ -45,7 +46,7 @@ public class Calculator {
                 break;
             }
         }
-        String[] operators = new String[3];
+        String[] operators = new String[COUNT_OPERATOR_OPERANDS];
         operators[0] = question.substring(0, question.indexOf(operator) - 1).trim();
         operators[1] = question.substring(question.indexOf(operator) + 1).trim();
         operators[2] = operator;

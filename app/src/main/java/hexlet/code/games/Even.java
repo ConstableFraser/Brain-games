@@ -4,21 +4,18 @@ import hexlet.code.Engine;
 import static hexlet.code.Utils.randInt;
 
 public class Even {
-    private static final String PROMPT = "Answer 'yes' if the number is even, otherwise answer 'no'.";
     private static final int MAX_RAND = 100;
 
     public static void playGame() {
-        int numberOfRounds = Engine.getNumberOfRounds();
-        String[] questions = new String[numberOfRounds];
-        String[] answers = new String[numberOfRounds];
+        String[][] questionsAndAnswers = new String[Engine.NUMBER_OF_ROUNDS][2];
 
-        for (int i = 0; i < numberOfRounds; i++) {
+        for (int i = 0; i < Engine.NUMBER_OF_ROUNDS; i++) {
             int questionValue = randInt(MAX_RAND);
             boolean answerValue = isEven(questionValue);
-            questions[i] = String.valueOf(questionValue);
-            answers[i] = answerValue ? "yes" : "no";
+            questionsAndAnswers[i][0] = String.valueOf(questionValue);
+            questionsAndAnswers[i][1] = answerValue ? "yes" : "no";
         }
-        Engine.startEngine(PROMPT, questions, answers);
+        Engine.startEngine("Answer 'yes' if the number is even, otherwise answer 'no'.", questionsAndAnswers);
     }
     public static boolean isEven(int value) {
         return value % 2 == 0;

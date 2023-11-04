@@ -6,21 +6,20 @@ import hexlet.code.Engine;
 import static hexlet.code.Utils.randInt;
 
 public class Progression {
-    private static final String PROMPT = "What number is missing in the progression?";
     private static final int MAX_RAND = 100;
-    private static final int MAX_LENGTH = 10;
+    private static final int MAX_LENGTH = 11;
     private static final int MAX_STEP = 5;
 
     public static void playGame() {
-        int numberOfRounds = Engine.getNumberOfRounds();
-        String[] questions = new String[numberOfRounds];
-        String[] answers = new String[numberOfRounds];
+        String[][] questionsAndAnswers = new String[Engine.NUMBER_OF_ROUNDS][2];
 
-        for (int i = 0; i < numberOfRounds; i++) {
-            questions[i] = String.join(" ", makeQuestion());
-            answers[i] = getCorrectAnswer(questions[i]);
+        for (int i = 0; i < Engine.NUMBER_OF_ROUNDS; i++) {
+            String[] question = makeQuestion(randInt(5, MAX_LENGTH), randInt(1, MAX_STEP), randInt(MAX_RAND));
+            question[randInt(1, question.length)] = "..";
+            questionsAndAnswers[i][0] = String.join(" ", question);
+            questionsAndAnswers[i][1] = getCorrectAnswer(questionsAndAnswers[i][0]);
         }
-        Engine.startEngine(PROMPT, questions, answers);
+        Engine.startEngine("What number is missing in the progression?", questionsAndAnswers);
     }
 
     public static String getCorrectAnswer(String question) {
@@ -41,18 +40,10 @@ public class Progression {
         return String.valueOf(result);
     }
 
-    private static String[] makeQuestion() {
-        String[] numbers = new String[MAX_LENGTH];
-        int startNumber = randInt(MAX_RAND);
-        int stopQuestion = randInt(MAX_LENGTH);
-        int step = randInt(1, MAX_STEP);
+    private static String[] makeQuestion(int sizeOfProgression, int step, int startNumber) {
+        String[] numbers = new String[sizeOfProgression];
 
-        for (int i = 0; i < MAX_LENGTH; i++) {
-            if (i == stopQuestion) {
-                numbers[i] = "..";
-                startNumber += step;
-                continue;
-            }
+        for (int i = 0; i < sizeOfProgression; i++) {
             numbers[i] = String.valueOf(startNumber);
             startNumber += step;
         }

@@ -7,11 +7,10 @@ import hexlet.code.games.Even;
 import hexlet.code.games.Prime;
 import hexlet.code.games.Calculator;
 import hexlet.code.games.Progression;
-import static hexlet.code.Cli.greeting;
+import static hexlet.code.Engine.introducing;
 
 public class App {
     private static final String[] MENU_OF_GAME = {"Greet", "Even", "Calc", "GCD", "Progression", "Prime", "Exit"};
-    private static final String WELCOME_TEXT = "Please enter the game number and press Enter.";
     private static final int EXIT = 0;
     private static final int GREETING = 1;
     private static final int EVEN = 2;
@@ -24,7 +23,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int menuItem;
 
-        System.out.println(WELCOME_TEXT);
+        System.out.println("Please enter the game number and press Enter.");
         printListOfGames();
         menuItem = scanner.nextInt();
         System.out.println("Your choice: " + menuItem);
@@ -42,7 +41,7 @@ public class App {
     private static void startGame(int menuItem) {
         switch (menuItem) {
             case GREETING:
-                greeting();
+                introducing();
                 return;
             case EVEN:
                 Even.playGame();

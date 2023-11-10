@@ -17,6 +17,7 @@ public class Even {
         }
         Engine.startEngine("Answer 'yes' if the number is even, otherwise answer 'no'.", questionsAndAnswers);
     }
+
     public static boolean isEven(int value) {
         return value % 2 == 0;
     }

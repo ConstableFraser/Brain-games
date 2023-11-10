@@ -17,6 +17,7 @@ public class Prime {
         }
         Engine.startEngine("Answer 'yes' if given number is prime. Otherwise answer 'no'.", questionsAndAnswers);
     }
+
     public static Boolean isPrime(int value) {
         if (value == 1) {
             return false;

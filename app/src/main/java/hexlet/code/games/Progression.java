@@ -1,7 +1,5 @@
 package hexlet.code.games;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import hexlet.code.Engine;
 import static hexlet.code.Utils.randInt;
 
@@ -10,13 +8,15 @@ public class Progression {
     private static final int MAX_LENGTH = 11;
     private static final int MAX_STEP = 5;
     private static final int MIN_LENGTH = 5;
+    private static int indexOfSecretQuestion;
 
     public static void playGame() {
         String[][] questionsAndAnswers = new String[Engine.NUMBER_OF_ROUNDS][2];
 
         for (int i = 0; i < Engine.NUMBER_OF_ROUNDS; i++) {
             String[] question = makeQuestion(randInt(MIN_LENGTH, MAX_LENGTH), randInt(1, MAX_STEP), randInt(MAX_RAND));
-            question[randInt(1, question.length)] = "..";
+            indexOfSecretQuestion = randInt(1, question.length);
+            question[indexOfSecretQuestion] = "..";
             questionsAndAnswers[i][0] = String.join(" ", question);
             questionsAndAnswers[i][1] = getCorrectAnswer(questionsAndAnswers[i][0]);
         }
@@ -25,8 +25,6 @@ public class Progression {
 
     public static String getCorrectAnswer(String question) {
         String[] words = question.split(" ");
-        // позиция искомого элемента
-        int posSecret = ArrayUtils.indexOf(words, "..");
         int delta = 0;
         // получаем значение дельты - разницу между двумя соседними цифрами
         for (int i = 0; i < words.length - 1; i++) {
@@ -36,8 +34,8 @@ public class Progression {
             delta = Integer.parseInt(words[i + 1]) - Integer.parseInt(words[i]);
         }
         // находим искомое значение
-        int result = posSecret == 0 ? Integer.parseInt(words[1]) - delta
-                                      : Integer.parseInt(words[posSecret - 1]) + delta;
+        int result = indexOfSecretQuestion == 0 ? Integer.parseInt(words[1]) - delta
+                                      : Integer.parseInt(words[indexOfSecretQuestion - 1]) + delta;
         return String.valueOf(result);
     }
 

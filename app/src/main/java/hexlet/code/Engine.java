@@ -6,10 +6,18 @@ public class Engine {
     public static final int NUMBER_OF_ROUNDS = 3;
 
     public static void startEngine(String prompt, String[][] questionsAndAnswers) {
-        String userName = introducing();
+        System.out.println("Welcome to the Brain Games!");
+        System.out.print("May I have your name? ");
+
+        Scanner scanner = new Scanner(System.in);
+        String userName = scanner.next();
+        System.out.println("Hello, " + userName + "!");
+
+        if (questionsAndAnswers.length == 0) {
+            return;
+        }
         System.out.println(prompt);
         boolean isCorrect = true;
-        Scanner scanner = new Scanner(System.in);
 
         for (int i = 0; i < NUMBER_OF_ROUNDS && isCorrect; i++) {
             String userAnswer;
@@ -25,16 +33,5 @@ public class Engine {
             System.out.println("Correct!");
         }
         System.out.format("Congratulations, %s!%n", userName);
-    }
-
-    public static String introducing() {
-        System.out.println("Welcome to the Brain Games!");
-        System.out.print("May I have your name? ");
-
-        Scanner scanner = new Scanner(System.in);
-        String name = scanner.next();
-
-        System.out.println("Hello, " + name + "!");
-        return name;
     }
 }

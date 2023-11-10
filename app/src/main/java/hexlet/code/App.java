@@ -7,7 +7,6 @@ import hexlet.code.games.Even;
 import hexlet.code.games.Prime;
 import hexlet.code.games.Calculator;
 import hexlet.code.games.Progression;
-import static hexlet.code.Engine.introducing;
 
 public class App {
     private static final String[] MENU_OF_GAME = {"Greet", "Even", "Calc", "GCD", "Progression", "Prime", "Exit"};
@@ -30,6 +29,7 @@ public class App {
 
         startGame(menuItem);
     }
+
     private static void printListOfGames() {
         var length = MENU_OF_GAME.length;
         for (int i = 0; i < length - 1; i++) {
@@ -41,7 +41,7 @@ public class App {
     private static void startGame(int menuItem) {
         switch (menuItem) {
             case GREETING:
-                introducing();
+                Engine.startEngine("", new String[][]{});
                 return;
             case EVEN:
                 Even.playGame();

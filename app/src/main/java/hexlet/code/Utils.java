@@ -8,15 +8,9 @@ public class Utils {
     public static int randInt(int stop) {
         return RAND.nextInt(stop);
     }
-    public static int randInt(int start, int stop) {
-        if (start >= stop) {
-            return RAND.nextInt(stop);
-        }
 
-        int result = RAND.nextInt(stop);
-        while (result < start) {
-            result = randInt(stop);
-        }
-        return result;
+    public static int randInt(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min) + min;
     }
 }
